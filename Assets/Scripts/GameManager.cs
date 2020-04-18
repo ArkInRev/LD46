@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -17,7 +18,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        SceneManager.LoadSceneAsync((int)SceneIndices.TITLESCREEN, LoadSceneMode.Additive);    
+        SceneManager.LoadSceneAsync((int)SceneIndices.TITLESCREEN, LoadSceneMode.Additive);
     }
 
 
@@ -27,6 +28,19 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadSceneAsync(sceneToLoad, LoadSceneMode.Additive);
     }
 
-    
+    public struct currentSession{
+
+        
+    }
+
+    public event Action onLarvaKilled;
+    public void LarvaKilled()
+    {
+        if (onLarvaKilled != null)
+        {
+            onLarvaKilled();
+        }
+    }
+
 
 }
