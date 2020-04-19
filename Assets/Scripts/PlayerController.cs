@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 {
     private GameManager gm;
     public float maxHealth = 100f;
+    public GameObject shieldGO;
 
     public float health { get ; set ; }
 
@@ -14,6 +15,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         if (damageTaken > 0) health = Mathf.Clamp(health - damageTaken,0,maxHealth);
         if (health <= 0) Kill();
+        gm.PlayerHealthChange();
     }
 
 
@@ -21,17 +23,20 @@ public class PlayerController : MonoBehaviour, IDamageable
     public void Heal(float damageHealed)
     {
         if(damageHealed>0) health = Mathf.Clamp(health + damageHealed,0,maxHealth);
+        gm.PlayerHealthChange();
     }
 
     public void Kill()
     {
        Debug.Log("The Player Was Killed, Not implemented");
+        gm.PlayerKilled();
     }
 
     // Start is called before the first frame update
     void Start()
     {
         gm = GameManager.instance;
+        gm.SetPlayerGameObject(this.gameObject);
         maxHealth = gm.GetPlayerHealth();
         health = gm.GetPlayerHealth();
     }
@@ -46,7 +51,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 
         SceneManager.sceneLoaded += OnSceneLoaded;
 
-        health = maxHealth;
+       // health = maxHealth;
     }
 
     void OnDisable()

@@ -37,6 +37,7 @@ public class TitleManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gm.isIntro = false;
         //introButton.onClick.AddListener(LoadIntro);
         //Debug.Log("Health = " + gm.playerHealth.ToString());
         Debug.Log("Scene build index: " + SceneManager.GetActiveScene().buildIndex);
@@ -50,7 +51,7 @@ public class TitleManager : MonoBehaviour
 
     public void LoadIntro()
     {
-
+        gm.isIntro = true;
         Debug.Log("LoadIntro() called once from TitleManager");
         gm.LoadScene((int)SceneIndices.TITLESCREEN, (int)SceneIndices.INTRO);
     }

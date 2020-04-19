@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   diffName: Normal
   pHealthMult: 1
+  pShieldMult: 1
   tHealthMult: 1
   eHealthMult: 1
   lHealthMult: 1
@@ -25,3 +26,6 @@ MonoBehaviour:
   hGainMult: 1
   sGainMult: 1
   eShootFreqMult: 1
+  hDropMult: 1
+  eDropMult: 1
+  sDropMult: 1

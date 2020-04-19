@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   diffName: Easy
   pHealthMult: 1.5
+  pShieldMult: 2.5
   tHealthMult: 0.75
   eHealthMult: 0.5
   lHealthMult: 2
@@ -25,3 +26,6 @@ MonoBehaviour:
   hGainMult: 1.5
   sGainMult: 1.25
   eShootFreqMult: 1.5
+  hDropMult: 3
+  eDropMult: 3
+  sDropMult: 3

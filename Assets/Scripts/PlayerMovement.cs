@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-   // private GameManager gm;
+    private GameManager gm;
 
     public float moveSpeed = 5f;
     public float rotSpeed = 5f;
@@ -18,16 +18,24 @@ public class PlayerMovement : MonoBehaviour
     private bool tryFire1;
     public float bulletForce = 20f;
 
+    private bool tryFire2;
+    public bool usingShield = false;
+    private float shieldHealth;
+    public GameObject shield;
+    public ShieldController shieldController;
+
     Vector3 moveDirection;
     private void Awake()
     {
-        //gm = GameManager.instance;
+        gm = GameManager.instance;
     }
     // Start is called before the first frame update
     void Start()
     {
         cam = Camera.main;
         moveDirection.y = 0;
+        shieldHealth = gm.GetPlayerShield();
+        shieldController = shield.GetComponent<ShieldController>();
     }
 
     // Update is called once per frame
@@ -36,9 +44,23 @@ public class PlayerMovement : MonoBehaviour
         moveDirection.x = Input.GetAxisRaw("Horizontal");
         moveDirection.z = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetButtonDown("Fire1"))
+        if (!usingShield)
         {
-            tryFire1 = true;
+           if (Input.GetButtonDown("Fire1"))
+            {
+                tryFire1 = true;
+            }
+        }
+ 
+
+        if (Input.GetButton("Fire2"))
+        {
+            tryFire2 = true;
+        }
+        else
+        {
+            tryFire2 = false;
+            usingShield = false;
         }
     }
 
@@ -58,15 +80,31 @@ public class PlayerMovement : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(targetPoint - transform.position);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotSpeed * Time.deltaTime);
 
-            if (tryFire1)
+            shieldHealth = shieldController.health;
+            if (tryFire2 && shieldHealth > 0)
             {
-                GameObject bullet = Instantiate(projectile, muzzleTip.position, muzzleTip.rotation);
-                Rigidbody bulletRB = bullet.GetComponent<Rigidbody>();
-                bulletRB.AddForce(muzzleTip.forward * bulletForce, ForceMode.Impulse);
-                tryFire1 = false;
+                usingShield = true;
+                shield.SetActive(true);
+            }
+            else
+            {
+                usingShield = false;
+                shield.SetActive(false);
+                if (tryFire1)
+                {
+                    GameObject bullet = Instantiate(projectile, muzzleTip.position, muzzleTip.rotation);
+                    Rigidbody bulletRB = bullet.GetComponent<Rigidbody>();
+                    bulletRB.AddForce(muzzleTip.forward * bulletForce, ForceMode.Impulse);
+                    tryFire1 = false;
+                }
             }
 
+
         }
+
+
+
+ 
 
  
 

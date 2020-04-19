@@ -13,6 +13,10 @@ public class UIManager : MonoBehaviour
 
     public Slider larvaHealthUI;
     public Slider larvaSeqUI;
+    public Slider playerHealthUI;
+    public Slider shieldHealthUI;
+    public TMP_Text healthText;
+    public TMP_Text shieldText;
 
     public CanvasGroup UIcg;
 
@@ -34,6 +38,32 @@ public class UIManager : MonoBehaviour
         larvaHealthUI.maxValue = GameManager.instance.GetLarvaHealth();
         larvaHealthUI.value = larvaHealthUI.maxValue;
         GameManager.instance.onLarvaSeqChange += OnLarvaSeqChange;
+        
+        GameManager.instance.onPlayerHealthChange += OnPlayerHealthChange;
+        playerHealthUI.minValue = 0f;
+        playerHealthUI.maxValue = GameManager.instance.GetPlayerHealth();
+        playerHealthUI.value = playerHealthUI.maxValue;
+        GameManager.instance.onShieldHealthChange += OnShieldHealthChange;
+        shieldHealthUI.minValue = 0f;
+        shieldHealthUI.maxValue = GameManager.instance.GetPlayerShield();
+        shieldHealthUI.value = shieldHealthUI.maxValue;
+
+    }
+
+    private void OnShieldHealthChange()
+    {
+        shieldHealthUI.minValue = 0f;
+        shieldHealthUI.maxValue = GameManager.instance.GetPlayerShield();
+        shieldHealthUI.value = GameManager.instance.shieldC.health;
+        shieldText.text = shieldHealthUI.value.ToString("F1") + " / " + shieldHealthUI.maxValue.ToString("F1");
+    }
+
+    private void OnPlayerHealthChange()
+    {
+        playerHealthUI.minValue = 0f;
+        playerHealthUI.maxValue = GameManager.instance.GetPlayerHealth();
+        playerHealthUI.value = GameManager.instance.playerC.health;
+        healthText.text = playerHealthUI.value.ToString("F1") + " / " + playerHealthUI.maxValue.ToString("F1");
     }
 
     private void OnLarvaHealthChange()
@@ -58,9 +88,11 @@ public class UIManager : MonoBehaviour
         {
             if (reloadUI)
             {
-                if (GameManager.instance.larvaC != null)
+                if ((GameManager.instance.larvaC != null) &&(GameManager.instance.playerC !=null)&&(GameManager.instance.shieldC!=null))
                 {
                     OnLarvaHealthChange();
+                    OnPlayerHealthChange();
+                    OnShieldHealthChange();
                     reloadUI = false;
 
                 }
@@ -81,5 +113,9 @@ public class UIManager : MonoBehaviour
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
+        GameManager.instance.onLarvaHealthChange -= OnLarvaHealthChange;
+        GameManager.instance.onLarvaSeqChange -= OnLarvaSeqChange;
+        GameManager.instance.onPlayerHealthChange -= OnPlayerHealthChange;
+        GameManager.instance.onShieldHealthChange -= OnShieldHealthChange;
     }
 }

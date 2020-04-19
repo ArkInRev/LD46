@@ -12,11 +12,12 @@ public class GameManager : MonoBehaviour
 {
     
     public static GameManager instance;
-
+    
   
 
     [Header("GameSettings")]
     [SerializeField] private float playerHealth = 100;
+    [SerializeField] private float playerShield = 100;
     [SerializeField] private float turretHealth = 50;
     [SerializeField] private float enemyHealth = 30;
     [SerializeField] private float larvaHealth = 100;
@@ -29,6 +30,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float seqGain = 10;
     [SerializeField] private float eShootFreq = 1.5f;
     [SerializeField] private float tShootFreq = 1.5f;
+    [SerializeField] private float hDropChance = .15f;
+    [SerializeField] private float eDropChance = .5f;
+    [SerializeField] private float sDropChance = .35f;
 
 
     [Header("Difficulty Settings")]
@@ -37,8 +41,13 @@ public class GameManager : MonoBehaviour
 
     public GameObject larva;
     public LarvaController larvaC;
+    public GameObject shield;
+    public ShieldController shieldC;
+    public GameObject player;
+    public PlayerController playerC;
 
-
+    public bool isIntro;
+    public string gameOverReason;
     
     #region basics
     private void Awake()
@@ -63,6 +72,7 @@ public class GameManager : MonoBehaviour
     #region Difficulty Management
 
     public float GetPlayerHealth() { return diffSettings[difficulty].pHealthMult * playerHealth; }
+    public float GetPlayerShield() { return diffSettings[difficulty].pShieldMult * playerShield; }
     public float GetTurretHealth() { return diffSettings[difficulty].tHealthMult * turretHealth; }
     public float GetEnemyHealth() { return diffSettings[difficulty].eHealthMult * enemyHealth; }
     public float GetLarvaHealth() { return diffSettings[difficulty].lHealthMult * larvaHealth; }
@@ -75,7 +85,9 @@ public class GameManager : MonoBehaviour
     public float GetSeqGain() { return diffSettings[difficulty].sGainMult * seqGain; }
     public float GetTurretShootFreq() { return diffSettings[difficulty].eShootFreqMult * tShootFreq; }
     public float GetEnemyShootFreq() { return diffSettings[difficulty].eShootFreqMult * eShootFreq; }
-
+    public float GetHealthDropChance() { return diffSettings[difficulty].hDropMult * hDropChance; }
+    public float GetEnergyDropChance() { return diffSettings[difficulty].eDropMult * eDropChance; }
+    public float GetSeqDropChance() { return diffSettings[difficulty].sDropMult * sDropChance; }
 
     #endregion
 
@@ -86,10 +98,23 @@ public class GameManager : MonoBehaviour
         larva = go;
         larvaC = go.GetComponent<LarvaController>();
     }
-    
+
+    public void SetShieldGameObject(GameObject go)
+    {
+        shield = go;
+        shieldC = go.GetComponent<ShieldController>();
+    }
+
+    public void SetPlayerGameObject(GameObject go)
+    {
+        player = go;
+        playerC = go.GetComponent<PlayerController>();
+    }
+
     public event Action onLarvaKilled;
     public void LarvaKilled()
     {
+        gameOverReason = "You Failed to Protect the Spawn of the Infinite Void, Blessing from beyond, and ruin of the galaxy.";
         if (onLarvaKilled != null)
         {
             onLarvaKilled();
@@ -122,6 +147,52 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public event Action onSeqDepleted;
+    public void SeqDepleted()
+    {
+        gameOverReason = "You did not feed the larva enough organic material to complete the genetic morph. The cult is disappointed with you.";
+        if (onSeqDepleted != null)
+        {
+            onSeqDepleted();
+        }
+
+        //temp reload the scene for testing
+        SceneManager.UnloadSceneAsync((int)SceneIndices.INTRO);
+        SceneManager.LoadSceneAsync((int)SceneIndices.GAME_OVER, LoadSceneMode.Additive);
+    }
+
+    public event Action onShieldHealthChange;
+    public void ShieldHealthChange()
+    {
+        if (onShieldHealthChange != null)
+        {
+            onShieldHealthChange();
+
+        }
+
+    }
+
+    public event Action onPlayerKilled;
+    public void PlayerKilled()
+    {
+        if (onPlayerKilled != null)
+        {
+            onPlayerKilled();
+
+        }
+
+    }
+
+    public event Action onPlayerHealthChange;
+    public void PlayerHealthChange()
+    {
+        if (onPlayerHealthChange != null)
+        {
+            onPlayerHealthChange();
+
+        }
+
+    }
 
     #endregion
 

@@ -31,7 +31,14 @@ public class Turret : MonoBehaviour, IDamageable
     public GameObject deadTurretModel;
     public ParticleSystem explosionParticles;
 
+    public float targetChange;
+    private float timeSinceLastTargetChange;
+
     private int currentMuzzle=0;
+
+    public float eDropChance;
+    public GameObject drop;
+
 
     // Start is called before the first frame update
     void Start()
@@ -47,7 +54,9 @@ public class Turret : MonoBehaviour, IDamageable
         healthBar.fillAmount = 1;
 
         shootFreq = gm.GetTurretShootFreq();
-
+        eDropChance = gm.GetEnergyDropChance();
+        if (gm.isIntro) { eDropChance = 1f; }
+        
 
     }
 
@@ -71,7 +80,15 @@ public class Turret : MonoBehaviour, IDamageable
                 Shoot(target.transform);
             }
 
-            
+            timeSinceLastTargetChange += Time.fixedDeltaTime;
+            if (timeSinceLastTargetChange > targetChange)
+            {
+                int targetChoice = Random.Range((int)0, (int)2);
+                if (targetChoice == 0) { target = player; } else { target = larva; }
+                targetChange = Random.Range(5.0f, 10.0f);
+            }
+
+
         }
     }
 
@@ -92,6 +109,7 @@ public class Turret : MonoBehaviour, IDamageable
         
         Instantiate(explosionParticles, this.transform.position, transform.rotation);
         Instantiate(deadTurretModel, this.transform.position, transform.rotation);
+        DropLoot();
         Collider[] colliders = Physics.OverlapSphere(transform.position, explodeRadius);
         foreach (Collider nearCollider in colliders)
         {
@@ -124,5 +142,16 @@ public class Turret : MonoBehaviour, IDamageable
     {
         Destroy(gameObject);
         return;
+    }
+
+    public void DropLoot()
+    {
+        float lootRoll = Random.Range(0f, 1f);
+        Debug.Log("Loot roll was " + lootRoll + " looking for " + eDropChance);
+        if ( lootRoll <= eDropChance)
+        {
+            Debug.Log("Dropping Loot");
+            Instantiate(drop, transform.position, Quaternion.identity);
+        }
     }
 }

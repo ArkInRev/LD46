@@ -18,6 +18,8 @@ public class GameOverManager : MonoBehaviour
     public Slider difficultySlider;
     public TMP_Text difficultyName;
 
+    public TMP_Text gameOverFlavor;
+
 
     public enum TitleWindows
     {
@@ -39,9 +41,11 @@ public class GameOverManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gm.isIntro = false;
         //introButton.onClick.AddListener(LoadIntro);
         //Debug.Log("Health = " + gm.playerHealth.ToString());
-        Debug.Log("Scene build index: " + SceneManager.GetActiveScene().buildIndex);
+        //Debug.Log("Scene build index: " + SceneManager.GetActiveScene().buildIndex);
+        gameOverFlavor.text = gm.gameOverReason;
     }
 
     // Update is called once per frame
@@ -52,7 +56,7 @@ public class GameOverManager : MonoBehaviour
 
     public void LoadIntro()
     {
-
+        gm.isIntro = true;
         Debug.Log("LoadIntro() called once from GameOverManager");
         gm.LoadScene((int)SceneIndices.GAME_OVER, (int)SceneIndices.INTRO);
     }

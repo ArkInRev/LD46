@@ -1389,7 +1389,7 @@ GameObject:
   - component: {fileID: 466371839}
   - component: {fileID: 466371838}
   m_Layer: 5
-  m_Name: Title
+  m_Name: ScreenHeading
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2704,6 +2704,7 @@ MonoBehaviour:
   controlsButton: {fileID: 305083844}
   difficultySlider: {fileID: 2044145660}
   difficultyName: {fileID: 1478676525}
+  gameOverFlavor: {fileID: 2046774907}
   titleCGs:
   - {fileID: 1837745560}
   - {fileID: 2071258652}
@@ -5242,7 +5243,7 @@ GameObject:
   - component: {fileID: 2046774908}
   - component: {fileID: 2046774907}
   m_Layer: 5
-  m_Name: Subtitle
+  m_Name: GameOverFlavor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

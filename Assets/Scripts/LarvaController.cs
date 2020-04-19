@@ -61,7 +61,7 @@ public class LarvaController : MonoBehaviour, IDamageable
 
     private void OnLarvaKilled()
     {
-        Debug.Log("LarvaControler OnLarvaKilled. ");
+        //Debug.Log("LarvaControler OnLarvaKilled. ");
     }
 
     // Update is called once per frame
@@ -72,8 +72,14 @@ public class LarvaController : MonoBehaviour, IDamageable
 
     public void FixedUpdate()
     {
-        seq -= (seqDecay * Time.fixedDeltaTime);
+        seq = Mathf.Clamp(seq-(seqDecay * Time.fixedDeltaTime),0,seqMax);
         gm.LarvaSeqChange();
+
+        if (seq <= 0)
+        {
+            gm.SeqDepleted();
+        }
+
     }
 
     void OnEnable()

@@ -8,6 +8,7 @@ public class DifficultySettings : ScriptableObject
 
         public string diffName; //name for the difficulty
         public float pHealthMult; //player health multiplier
+        public float pShieldMult; //player shield multiplier
         public float tHealthMult; //turret health multiplier
         public float eHealthMult; //enemy health multiplier
         public float lHealthMult; //larva health multiplier
@@ -19,5 +20,9 @@ public class DifficultySettings : ScriptableObject
         public float hGainMult; // health gain multiplier
         public float sGainMult; //sequencing gain Multiplier
         public float eShootFreqMult; //enemy shooting frequency Multiplier (higher is less frequent shots)
+        public float hDropMult; // health drop chane multiplier 
+    public float eDropMult; // energy drop chance multiplier
+    public float sDropMult; // seqencing drop chance multiplier. 
+
 
 }

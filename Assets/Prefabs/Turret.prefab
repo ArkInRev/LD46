@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4948109088832309840}
   - component: {fileID: 4948109088832309847}
   - component: {fileID: 4948109088832309846}
+  - component: {fileID: 86447995227220123}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -99,6 +100,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &86447995227220123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4948109088832309844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 733bd2bf778b46345aba1d5c659eca35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4948109089672489028
 GameObject:
   m_ObjectHideFlags: 0
@@ -535,11 +548,11 @@ MonoBehaviour:
   target: {fileID: 0}
   player: {fileID: 0}
   larva: {fileID: 0}
-  isPoweredOn: 0
+  isPoweredOn: 1
   explodeRadius: 5
   explodeForce: 800
   shootFreq: 0
-  projectile: {fileID: 8337718556842188786, guid: c7650e6d1af9a094d9afc7b14f371c5b,
+  projectile: {fileID: 8337718556842188786, guid: 587923c82725d774dabafca1ffb2bb42,
     type: 3}
   muzzleTip:
   - {fileID: 4948109089672489029}
@@ -552,6 +565,9 @@ MonoBehaviour:
     type: 3}
   explosionParticles: {fileID: 6095250033241007824, guid: 0aa523efe37323446930657f44cadfff,
     type: 3}
+  targetChange: 0
+  eDropChance: 0
+  drop: {fileID: 2655844926678286914, guid: eaef1a2169ca73941b2a46ec41b5ae6b, type: 3}
 --- !u!1 &4948109090837110892
 GameObject:
   m_ObjectHideFlags: 0

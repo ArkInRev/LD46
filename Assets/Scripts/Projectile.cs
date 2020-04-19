@@ -16,7 +16,20 @@ public class Projectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       //this.GetComponent<Rigidbody>();
+        //this.GetComponent<Rigidbody>();
+        switch (this.tag)
+        {
+            case "PlayerProjectile":
+                damageCaused = GameManager.instance.GetPlayerDamage();
+                break;
+            case "EnemyProjectile":
+                damageCaused = GameManager.instance.GetEnemyDamage();
+                break;
+            default:
+                damageCaused = GameManager.instance.GetEnemyDamage();
+                break;
+        }
+       //damageCaused = GameManager.instance.
     }
 
     // Update is called once per frame
