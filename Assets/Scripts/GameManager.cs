@@ -13,8 +13,7 @@ public class GameManager : MonoBehaviour
     
     public static GameManager instance;
     
-  
-
+ 
     [Header("GameSettings")]
     [SerializeField] private float playerHealth = 100;
     [SerializeField] private float playerShield = 100;
@@ -48,7 +47,10 @@ public class GameManager : MonoBehaviour
 
     public bool isIntro;
     public string gameOverReason;
-    
+
+    public int gamesWon = 0;
+    public int gamesToVictory = 5;
+
     #region basics
     private void Awake()
     {
@@ -120,9 +122,10 @@ public class GameManager : MonoBehaviour
             onLarvaKilled();
         }
         Debug.Log("Game Manager just saw the larva be killed.");
-        //temp reload the scene for testing
-        SceneManager.UnloadSceneAsync((int)SceneIndices.INTRO);
-        SceneManager.LoadSceneAsync((int)SceneIndices.GAME_OVER,LoadSceneMode.Additive);
+        int unload;
+        if (isIntro) { unload = (int)SceneIndices.INTRO; } else { unload = (int)SceneIndices.MAP; }
+        SceneManager.UnloadSceneAsync(unload);
+        SceneManager.LoadSceneAsync((int)SceneIndices.GAME_OVER, LoadSceneMode.Additive);
     }
 
     public event Action onLarvaHealthChange;
@@ -145,7 +148,31 @@ public class GameManager : MonoBehaviour
 
         }
 
+        if (larvaC.seq >= 100)
+        {
+            if (isIntro)
+            {
+                gamesWon = 0;
+                LoadScene((int)SceneIndices.INTRO, (int)SceneIndices.NEXTLEVEL);
+            }
+            else
+            {
+                gamesWon += 1;
+                if(gamesWon == gamesToVictory)
+                {
+                    LoadScene((int)SceneIndices.MAP, (int)SceneIndices.VICTORY);
+                }
+                else
+                {
+                    LoadScene((int)SceneIndices.MAP, (int)SceneIndices.NEXTLEVEL);
+                }
+                
+            }
+        }
+
     }
+
+
 
     public event Action onSeqDepleted;
     public void SeqDepleted()
@@ -155,9 +182,9 @@ public class GameManager : MonoBehaviour
         {
             onSeqDepleted();
         }
-
-        //temp reload the scene for testing
-        SceneManager.UnloadSceneAsync((int)SceneIndices.INTRO);
+        int unload;
+        if (isIntro) { unload = (int)SceneIndices.INTRO; } else { unload = (int)SceneIndices.MAP; }
+        SceneManager.UnloadSceneAsync(unload);
         SceneManager.LoadSceneAsync((int)SceneIndices.GAME_OVER, LoadSceneMode.Additive);
     }
 

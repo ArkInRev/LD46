@@ -11,6 +11,11 @@ public class HealthPickup : MonoBehaviour, IInteractable
     public GameObject player;
     public ParticleSystem pickupEffect;
 
+    public Transform initialParent;
+
+    public GameObject spawnParentGO;
+    GameObject goInstantiated;
+
     public void Interact()
     {
         //throw new System.NotImplementedException();
@@ -18,7 +23,7 @@ public class HealthPickup : MonoBehaviour, IInteractable
         {
             pc.Heal(healthGain);
             Instantiate(pickupEffect, transform.position, Quaternion.identity);
-            Destroy(transform.parent.gameObject);
+            Destroy(initialParent.gameObject);
         }
 
 
@@ -33,6 +38,12 @@ public class HealthPickup : MonoBehaviour, IInteractable
         player = GameObject.FindWithTag("Player");
         healthGain = gm.GetHealthGain();
         pc = player.GetComponent<PlayerController>();
+
+        initialParent = gameObject.transform.parent;
+
+        spawnParentGO = GameObject.FindWithTag("MapGOTagger");
+        goInstantiated = initialParent.gameObject;
+        goInstantiated.transform.SetParent(spawnParentGO.transform);
     }
 
     // Update is called once per frame

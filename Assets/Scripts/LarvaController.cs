@@ -115,7 +115,8 @@ public class LarvaController : MonoBehaviour, IDamageable, IInteractable
 
     private void GainSequence(float v)
     {
-        seq = Mathf.Clamp(seq + v, 0, seqMax);
+        seq = seq + v;
+
         gm.DNADeliver();
     }
 

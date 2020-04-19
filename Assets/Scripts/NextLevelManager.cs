@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 
 
-public class GameOverManager : MonoBehaviour
+public class NextLevelManager : MonoBehaviour
 {
     private GameManager gm;
 
@@ -33,6 +33,8 @@ public class GameOverManager : MonoBehaviour
     public int lastTitleWindow;
     public int currentTitleWindow;
 
+    public string victoryFlavorText;
+
     private void Awake()
     {
         gm = GameManager.instance;
@@ -45,28 +47,21 @@ public class GameOverManager : MonoBehaviour
         //introButton.onClick.AddListener(LoadIntro);
         //Debug.Log("Health = " + gm.playerHealth.ToString());
         //Debug.Log("Scene build index: " + SceneManager.GetActiveScene().buildIndex);
-        gameOverFlavor.text = gm.gameOverReason;
+        victoryFlavorText = "You have helped our Larval Lord gestate " + gm.gamesWon + " out of " + gm.gamesToVictory + " times. The Harbinger of Oblivion draws nigh!";
+        gameOverFlavor.text = victoryFlavorText;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
 
-    public void LoadIntro()
-    {
-        gm.isIntro = true;
-        Debug.Log("LoadIntro() called once from GameOverManager");
-        gm.LoadScene((int)SceneIndices.GAME_OVER, (int)SceneIndices.INTRO);
     }
 
     public void LoadMap()
     {
         gm.isIntro = false;
-        gm.gamesWon = 0;
         //ebug.Log("LoadIntro() called once from GameOverManager");
-        gm.LoadScene((int)SceneIndices.GAME_OVER, (int)SceneIndices.MAP);
+        gm.LoadScene((int)SceneIndices.NEXTLEVEL, (int)SceneIndices.MAP);
     }
 
     public void EnableCanvasGroup(int cg)

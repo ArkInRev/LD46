@@ -56,6 +56,14 @@ public class TitleManager : MonoBehaviour
         gm.LoadScene((int)SceneIndices.TITLESCREEN, (int)SceneIndices.INTRO);
     }
 
+    public void LoadMap()
+    {
+        gm.isIntro = false;
+        gm.gamesWon = 0;
+        //ebug.Log("LoadIntro() called once from GameOverManager");
+        gm.LoadScene((int)SceneIndices.TITLESCREEN, (int)SceneIndices.MAP);
+    }
+
     public void EnableCanvasGroup(int cg)
     {
         //temp

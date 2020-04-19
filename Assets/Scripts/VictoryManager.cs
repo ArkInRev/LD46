@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 
 
-public class GameOverManager : MonoBehaviour
+public class VictoryManager : MonoBehaviour
 {
     private GameManager gm;
 
@@ -45,20 +45,20 @@ public class GameOverManager : MonoBehaviour
         //introButton.onClick.AddListener(LoadIntro);
         //Debug.Log("Health = " + gm.playerHealth.ToString());
         //Debug.Log("Scene build index: " + SceneManager.GetActiveScene().buildIndex);
-        gameOverFlavor.text = gm.gameOverReason;
+        //gameOverFlavor.text = gm.gameOverReason;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void LoadIntro()
     {
         gm.isIntro = true;
         Debug.Log("LoadIntro() called once from GameOverManager");
-        gm.LoadScene((int)SceneIndices.GAME_OVER, (int)SceneIndices.INTRO);
+        gm.LoadScene((int)SceneIndices.VICTORY, (int)SceneIndices.INTRO);
     }
 
     public void LoadMap()
@@ -66,7 +66,7 @@ public class GameOverManager : MonoBehaviour
         gm.isIntro = false;
         gm.gamesWon = 0;
         //ebug.Log("LoadIntro() called once from GameOverManager");
-        gm.LoadScene((int)SceneIndices.GAME_OVER, (int)SceneIndices.MAP);
+        gm.LoadScene((int)SceneIndices.VICTORY, (int)SceneIndices.MAP);
     }
 
     public void EnableCanvasGroup(int cg)

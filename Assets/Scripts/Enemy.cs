@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 
 public class Enemy : MonoBehaviour, IDamageable
@@ -39,6 +40,14 @@ public class Enemy : MonoBehaviour, IDamageable
     public float sDropChance;
     public GameObject drop;
 
+    public float lookRadius = 10f;
+    NavMeshAgent agent;
+
+    public void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, lookRadius);
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -57,13 +66,14 @@ public class Enemy : MonoBehaviour, IDamageable
         sDropChance = gm.GetSeqDropChance();
         if (gm.isIntro) { sDropChance = 1f; }
 
+        agent = GetComponent<NavMeshAgent>();
 
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        agent.SetDestination(target.transform.position);
     }
 
     private void FixedUpdate()
@@ -87,6 +97,8 @@ public class Enemy : MonoBehaviour, IDamageable
                 if (targetChoice == 0) { target = player; } else { target = larva; }
                 targetChange = Random.Range(5.0f, 10.0f);
             }
+
+
 
 
         }

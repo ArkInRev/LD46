@@ -10,6 +10,7 @@ TagManager:
   - PlayerProjectile
   - Shield
   - PlayerSpawn
+  - MapGOTagger
   layers:
   - Default
   - TransparentFX

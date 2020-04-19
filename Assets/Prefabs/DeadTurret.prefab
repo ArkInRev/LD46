@@ -138,6 +138,7 @@ GameObject:
   - component: {fileID: 8007496613834690103}
   - component: {fileID: 8007496613834690102}
   - component: {fileID: -8701825036962188456}
+  - component: {fileID: 44977281221301432}
   m_Layer: 0
   m_Name: DeadTurret
   m_TagString: Enemy
@@ -237,6 +238,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &44977281221301432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8007496613834690100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5fd914e602333f4082e11241206d5d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8007496614150928861
 GameObject:
   m_ObjectHideFlags: 0

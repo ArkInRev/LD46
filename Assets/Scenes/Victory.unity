@@ -1432,7 +1432,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Game Over
+  m_text: Victory
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dadf92785ee790c44a6fcc0ca8269b9c, type: 2}
   m_sharedMaterial: {fileID: 3669733232431933109, guid: dadf92785ee790c44a6fcc0ca8269b9c,
@@ -1502,10 +1502,10 @@ MonoBehaviour:
   m_margin: {x: 80.8021, y: -1.4320087, z: 0, w: 20.737356}
   m_textInfo:
     textComponent: {fileID: 466371838}
-    characterCount: 9
+    characterCount: 7
     spriteCount: 0
-    spaceCount: 1
-    wordCount: 2
+    spaceCount: 0
+    wordCount: 1
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -2521,7 +2521,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 866134814}
+      - m_Target: {fileID: 0}
         m_MethodName: ClickBack
         m_Mode: 1
         m_Arguments:
@@ -2653,7 +2653,7 @@ GameObject:
   - component: {fileID: 866134812}
   - component: {fileID: 866134814}
   m_Layer: 0
-  m_Name: GameOverManager
+  m_Name: VictoryManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2706,7 +2706,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 866134811}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9960fe745fe1fbe44b3abeb8660d3270, type: 3}
+  m_Script: {fileID: 11500000, guid: 3fc68afd49b14ee4db30023330578b0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   introButton: {fileID: 1680973364}
@@ -2716,10 +2716,7 @@ MonoBehaviour:
   difficultySlider: {fileID: 2044145660}
   difficultyName: {fileID: 1478676525}
   gameOverFlavor: {fileID: 2046774907}
-  titleCGs:
-  - {fileID: 1837745560}
-  - {fileID: 2071258652}
-  - {fileID: 457707466}
+  titleCGs: []
   lastTitleWindow: 0
   currentTitleWindow: 0
 --- !u!1 &993084212
@@ -4740,7 +4737,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 866134814}
+      - m_Target: {fileID: 0}
         m_MethodName: ClickBack
         m_Mode: 1
         m_Arguments:
@@ -4867,7 +4864,7 @@ GameObject:
   - component: {fileID: 1837745556}
   - component: {fileID: 1837745560}
   m_Layer: 5
-  m_Name: GameOverCanvas
+  m_Name: VictoryCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5269,15 +5266,15 @@ RectTransform:
   m_GameObject: {fileID: 2046774905}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3.7594998, y: 3.7594998, z: 3.7594998}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 706367991}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 11.99999, y: 92}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 128, y: 92}
+  m_SizeDelta: {x: 450, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2046774907
 MonoBehaviour:
@@ -5297,8 +5294,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You Failed to Protect the Spawn of the Infinite Void, Blessing from beyond,
-    and ruin of the galaxy.
+  m_text: "Behold, the Lord of Ruin and the End of All Things! \n\nThe Dark Lord
+    has arrived, and you have earned the distinction of being the first to be consumed.
+    \n\nCongratulations Brother"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dadf92785ee790c44a6fcc0ca8269b9c, type: 2}
   m_sharedMaterial: {fileID: 3669733232431933109, guid: dadf92785ee790c44a6fcc0ca8269b9c,
@@ -5327,8 +5325,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 8
-  m_fontSizeBase: 8
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5344,7 +5342,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 26
+  m_firstOverflowCharacterIndex: 0
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -5368,12 +5366,12 @@ MonoBehaviour:
   m_margin: {x: 80.085884, y: 16.403316, z: 0, w: 16.522165}
   m_textInfo:
     textComponent: {fileID: 2046774907}
-    characterCount: 99
+    characterCount: 177
     spriteCount: 0
-    spaceCount: 17
-    wordCount: 18
+    spaceCount: 34
+    wordCount: 31
     linkCount: 0
-    lineCount: 4
+    lineCount: 9
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
