@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LarvaController : MonoBehaviour, IDamageable
 {
@@ -11,9 +12,15 @@ public class LarvaController : MonoBehaviour, IDamageable
 
     public float health { get; set; }
 
+    public float seq;
+    public float seqMax = 100f;
+    public float seqDecay;
+ //   public float timesincelastdecay = 0;
+
     public void Damage(float damageTaken)
     {
         if (damageTaken > 0) health = Mathf.Clamp(health - damageTaken, 0, maxHealth);
+        gm.LarvaHealthChange();
         if (health <= 0) Kill();
     }
 
@@ -22,6 +29,7 @@ public class LarvaController : MonoBehaviour, IDamageable
     public void Heal(float damageHealed)
     {
         if (damageHealed > 0) health = Mathf.Clamp(health + damageHealed, 0, maxHealth);
+        gm.LarvaHealthChange();
     }
 
     public void Kill()
@@ -34,12 +42,21 @@ public class LarvaController : MonoBehaviour, IDamageable
     void Awake()
     {
         gm = GameManager.instance;
+
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        gm.SetLarvaGameObject(this.gameObject);
         gm.onLarvaKilled += OnLarvaKilled;
+        maxHealth = gm.GetLarvaHealth();
+        health = gm.GetLarvaHealth();
+        gm.LarvaHealthChange();
+
+        seq = gm.GetStartSeq();
+        seqDecay = gm.GetSeqDecay();
+
     }
 
     private void OnLarvaKilled()
@@ -53,8 +70,27 @@ public class LarvaController : MonoBehaviour, IDamageable
         
     }
 
+    public void FixedUpdate()
+    {
+        seq -= (seqDecay * Time.fixedDeltaTime);
+        gm.LarvaSeqChange();
+    }
+
     void OnEnable()
     {
-        health = maxHealth;
+        SceneManager.sceneLoaded += OnSceneLoaded;
+
+
+    }
+
+    void onDisable()
+    {
+        gm.onLarvaKilled -= OnLarvaKilled;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+
     }
 }

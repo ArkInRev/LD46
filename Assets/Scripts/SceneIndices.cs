@@ -7,8 +7,9 @@ public enum SceneIndices
     MANAGER = 0,
     TITLESCREEN = 1,
     INTRO = 2,
-    NEXTLEVEL = 3,
-    VICTORY = 4,
-    GAME_OVER = 5,
+    GAME_OVER = 3,
+    NEXTLEVEL = 4,
+    VICTORY = 5,
+
     MAP = 6
 }

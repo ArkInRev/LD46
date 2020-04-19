@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 
-public class TitleManager : MonoBehaviour
+public class GameOverManager : MonoBehaviour
 {
     private GameManager gm;
 
@@ -12,6 +14,9 @@ public class TitleManager : MonoBehaviour
     public Button playButton;
     public Button settingsButton;
     public Button controlsButton;
+
+    public Slider difficultySlider;
+    public TMP_Text difficultyName;
 
 
     public enum TitleWindows
@@ -35,7 +40,8 @@ public class TitleManager : MonoBehaviour
     void Start()
     {
         //introButton.onClick.AddListener(LoadIntro);
-        Debug.Log("Health = " + gm.playerHealth.ToString());
+        //Debug.Log("Health = " + gm.playerHealth.ToString());
+        Debug.Log("Scene build index: " + SceneManager.GetActiveScene().buildIndex);
     }
 
     // Update is called once per frame
@@ -47,8 +53,8 @@ public class TitleManager : MonoBehaviour
     public void LoadIntro()
     {
 
-        Debug.Log("LoadIntro() called once from TitleManager");
-        gm.LoadScene((int)SceneIndices.TITLESCREEN, (int)SceneIndices.INTRO);
+        Debug.Log("LoadIntro() called once from GameOverManager");
+        gm.LoadScene((int)SceneIndices.GAME_OVER, (int)SceneIndices.INTRO);
     }
 
     public void EnableCanvasGroup(int cg)
@@ -69,6 +75,8 @@ public class TitleManager : MonoBehaviour
 
     public void ClickSettings()
     {
+        difficultySlider.value = GameManager.instance.difficulty;
+        difficultyName.text = GameManager.instance.diffSettings[(int)difficultySlider.value].diffName;
         DisableCanvasGroup(currentTitleWindow);
         lastTitleWindow = currentTitleWindow;
         currentTitleWindow = (int)TitleWindows.SETTINGS;
@@ -90,5 +98,11 @@ public class TitleManager : MonoBehaviour
         lastTitleWindow = currentTitleWindow;
         currentTitleWindow = (int)TitleWindows.CONTROLS;
         EnableCanvasGroup(currentTitleWindow);
+    }
+
+    public void DifficultyChanged()
+    {
+        GameManager.instance.difficulty = (int)difficultySlider.value;
+        difficultyName.text = GameManager.instance.diffSettings[(int)difficultySlider.value].diffName;
     }
 }

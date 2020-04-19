@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38c74f14956b7ae4899ade913728508b, type: 3}
+  m_Name: Hard
+  m_EditorClassIdentifier: 
+  diffName: Hard
+  pHealthMult: 0.75
+  tHealthMult: 1.75
+  eHealthMult: 2
+  lHealthMult: 0.6
+  pDamageMult: 0.75
+  eDamageMult: 2
+  lStartSeqMult: 0.5
+  lDecaySeqMult: 2
+  eGainMult: 0.75
+  hGainMult: 0.5
+  sGainMult: 0.5
+  eShootFreqMult: 0.35
