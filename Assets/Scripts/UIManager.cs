@@ -18,6 +18,9 @@ public class UIManager : MonoBehaviour
     public TMP_Text healthText;
     public TMP_Text shieldText;
 
+
+    public TMP_Text DNACountText;
+
     public CanvasGroup UIcg;
 
     private bool reloadUI = false;
@@ -48,6 +51,13 @@ public class UIManager : MonoBehaviour
         shieldHealthUI.maxValue = GameManager.instance.GetPlayerShield();
         shieldHealthUI.value = shieldHealthUI.maxValue;
 
+        DNACountText.text = "0";
+        GameManager.instance.onDNAChange += OnDNAChange;
+    }
+
+    private void OnDNAChange()
+    {
+        DNACountText.text = GameManager.instance.playerC.seqCarried.ToString();
     }
 
     private void OnShieldHealthChange()
@@ -117,5 +127,8 @@ public class UIManager : MonoBehaviour
         GameManager.instance.onLarvaSeqChange -= OnLarvaSeqChange;
         GameManager.instance.onPlayerHealthChange -= OnPlayerHealthChange;
         GameManager.instance.onShieldHealthChange -= OnShieldHealthChange;
+        GameManager.instance.onDNAChange -= OnDNAChange;
     }
+
+
 }

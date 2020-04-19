@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LarvaController : MonoBehaviour, IDamageable
+public class LarvaController : MonoBehaviour, IDamageable, IInteractable
 {
     private GameManager gm;
 
@@ -15,6 +15,7 @@ public class LarvaController : MonoBehaviour, IDamageable
     public float seq;
     public float seqMax = 100f;
     public float seqDecay;
+    public float seqGain;
  //   public float timesincelastdecay = 0;
 
     public void Damage(float damageTaken)
@@ -56,6 +57,7 @@ public class LarvaController : MonoBehaviour, IDamageable
 
         seq = gm.GetStartSeq();
         seqDecay = gm.GetSeqDecay();
+        seqGain = gm.GetSeqGain();
 
     }
 
@@ -99,4 +101,31 @@ public class LarvaController : MonoBehaviour, IDamageable
     {
 
     }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Interact();
+            int DNADelivered = other.GetComponent<PlayerController>().seqCarried;
+            other.GetComponent<PlayerController>().ResetSeqCarried();
+            GainSequence(DNADelivered * seqGain);
+        }
+    }
+
+    private void GainSequence(float v)
+    {
+        seq = Mathf.Clamp(seq + v, 0, seqMax);
+        gm.DNADeliver();
+    }
+
+    public void Interact()
+    {
+        return;
+
+
+
+
+    }
+
 }

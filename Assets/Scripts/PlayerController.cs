@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour, IDamageable
     public float maxHealth = 100f;
     public GameObject shieldGO;
 
+    public int seqCarried = 0;
+
     public float health { get ; set ; }
 
     public void Damage(float damageTaken)
@@ -18,6 +20,11 @@ public class PlayerController : MonoBehaviour, IDamageable
         gm.PlayerHealthChange();
     }
 
+    public void PickupDNA()
+    {
+        seqCarried += 1;
+        gm.DNAPickup();
+    }
 
 
     public void Heal(float damageHealed)
@@ -68,5 +75,11 @@ public class PlayerController : MonoBehaviour, IDamageable
     void Update()
     {
         
+    }
+
+    public void ResetSeqCarried()
+    {
+        seqCarried = 0;
+        gm.DNAChange();
     }
 }

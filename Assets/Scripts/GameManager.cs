@@ -194,6 +194,39 @@ public class GameManager : MonoBehaviour
 
     }
 
+
+    public event Action onDNAPickup;
+    public void DNAPickup()
+    {
+        if (onDNAPickup != null)
+        {
+            onDNAPickup();
+
+        }
+        DNAChange();
+    }
+
+    public event Action onDNADeliver;
+    public void DNADeliver()
+    {
+        if (onDNADeliver != null)
+        {
+            onDNADeliver();
+
+        }
+        DNAChange();
+    }
+
+    public event Action onDNAChange;
+    public void DNAChange()
+    {
+        if (onDNAChange != null)
+        {
+            onDNAChange();
+
+        }
+
+    }
     #endregion
 
 }
