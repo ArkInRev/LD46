@@ -16,16 +16,16 @@ MonoBehaviour:
   pHealthMult: 0.75
   pShieldMult: 0.5
   tHealthMult: 1.75
-  eHealthMult: 2
-  lHealthMult: 0.6
+  eHealthMult: 1.5
+  lHealthMult: 1
   pDamageMult: 0.75
-  eDamageMult: 2
+  eDamageMult: 1.25
   lStartSeqMult: 0.5
-  lDecaySeqMult: 2
+  lDecaySeqMult: 1.25
   eGainMult: 0.75
   hGainMult: 0.5
-  sGainMult: 0.5
+  sGainMult: 0.75
   eShootFreqMult: 0.35
   hDropMult: 0.5
   eDropMult: 0.75
-  sDropMult: 0.5
+  sDropMult: 1

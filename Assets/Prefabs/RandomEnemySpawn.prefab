@@ -49,3 +49,8 @@ MonoBehaviour:
   - {fileID: 5002361181360671516, guid: eceef75796577d5429f7f199a8885c2a, type: 3}
   - {fileID: 1965557211013329453, guid: 2f393b9ffa3bf0441b3ca0a60c8b845f, type: 3}
   - {fileID: 2655844926678286914, guid: eaef1a2169ca73941b2a46ec41b5ae6b, type: 3}
+  - {fileID: 4948109090791676120, guid: 501cd72aeeb131d468b6b5ba62b66905, type: 3}
+  - {fileID: 5002361181360671516, guid: eceef75796577d5429f7f199a8885c2a, type: 3}
+  - {fileID: 5002361181360671516, guid: eceef75796577d5429f7f199a8885c2a, type: 3}
+  mapGOParent: {fileID: 0}
+  spawnParentGO: {fileID: 0}

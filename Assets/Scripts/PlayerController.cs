@@ -35,7 +35,10 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     public void Kill()
     {
-       Debug.Log("The Player Was Killed, Not implemented");
+
+        //Debug.Log("The Player Was Killed, Not implemented");
+        ResetSeqCarried();
+        gm.DNAChange();
         gm.PlayerKilled();
     }
 
@@ -46,6 +49,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         gm.SetPlayerGameObject(this.gameObject);
         maxHealth = gm.GetPlayerHealth();
         health = gm.GetPlayerHealth();
+        ResetSeqCarried();
     }
 
     private void Awake()

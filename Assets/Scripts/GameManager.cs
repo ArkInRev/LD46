@@ -56,6 +56,11 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
 
+
+    }
+
+    private void Start()
+    {
         SceneManager.LoadSceneAsync((int)SceneIndices.TITLESCREEN, LoadSceneMode.Additive);
     }
 
@@ -69,6 +74,11 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.UnloadSceneAsync(sceneToUnload);
         SceneManager.LoadSceneAsync(sceneToLoad, LoadSceneMode.Additive);
+    }
+
+    public void EmergencyRestart()
+    {
+        SceneManager.LoadScene(0);
     }
 
     #region Difficulty Management
@@ -150,6 +160,8 @@ public class GameManager : MonoBehaviour
 
         if (larvaC.seq >= 100)
         {
+            larvaC.seq = 10;
+            playerC.seqCarried = 0;
             if (isIntro)
             {
                 gamesWon = 0;

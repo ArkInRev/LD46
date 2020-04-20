@@ -66,6 +66,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void FixedUpdate()
     {
+        //if (transform.position.y < 3f) { gm.EmergencyRestart(); }
+
         //physics and movement
         Vector3 inputVector = (Vector3.forward * moveDirection.z) + (Vector3.right * moveDirection.x);
         rb.MovePosition(rb.position + inputVector * moveSpeed * Time.fixedDeltaTime);

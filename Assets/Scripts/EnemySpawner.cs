@@ -11,8 +11,8 @@ public class EnemySpawner : MonoBehaviour, ISpawner
     public GameObject spawnParentGO;
     GameObject goInstantiated;
 
-    public float timeBetweenSpawnsMin = 5;
-    public float timeBetweenSpawnsMax = 10;
+    public float timeBetweenSpawnsMin = 3;
+    public float timeBetweenSpawnsMax = 8;
     public float timeUntilNextSpawn = 5;
     public float timeSinceLastSpawn = 0;
  ///   private PlayerController pc;
@@ -29,6 +29,7 @@ public class EnemySpawner : MonoBehaviour, ISpawner
     {
         gm = GameManager.instance;
         spawnParentGO = GameObject.FindWithTag("MapGOTagger");
+        timeUntilNextSpawn = Random.Range(timeBetweenSpawnsMin, timeBetweenSpawnsMax);
         //       gm.onPlayerKilled += OnPlayerKilled;
         //        Spawn(player, playerSpawnLocation);
     }
